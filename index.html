@@ -1,0 +1,493 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Laboratório de Infoproduto</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,700&family=Inter+Tight:wght@400;500;600;700&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Source+Sans+3:wght@400;700&family=Montserrat:wght@400;800&family=Merriweather:wght@400;700&family=Poppins:wght@400;700&family=Lora:wght@400;700&family=Bebas+Neue&family=Open+Sans:wght@400;700&family=DM+Serif+Display&family=DM+Sans:wght@400;700&family=Space+Grotesk:wght@400;700&family=Inter:wght@400;700&family=Work+Sans:wght@400;700&family=Archivo+Black&family=Roboto:wght@400;700&family=Cormorant+Garamond:wght@600;700&family=Raleway:wght@400;700&family=Oswald:wght@500;700&family=Lato:wght@400;700&family=Abril+Fatface&family=Nunito:wght@400;700&family=Quicksand:wght@500;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div class="app">
+<aside id="side">
+  <div class="brand"><div class="logo">IL</div><div><b>Laboratório de Infoproduto</b><div class="mono" id="projName">Projeto sem nome</div></div></div>
+  <div class="prog"><div class="row between"><span class="mono">Progresso</span><span class="mono" id="pct">0%</span></div><div class="bar"><i id="pbar"></i></div></div>
+  <nav class="nav" id="nav"></nav>
+  <div class="side-actions">
+    <button class="btn ghost sm" id="btnExport">Exportar / importar projeto</button>
+    <button class="btn ghost sm" id="btnReset">Começar projeto novo</button>
+  </div>
+</aside>
+
+<main>
+<div class="topbar"><button class="btn ghost sm" id="menuBtn">Menu</button><b id="topTitle" style="font-family:"Inter Tight",sans-serif"></b></div>
+<div class="ph" id="ph"></div>
+
+<!-- ============ ESTRATÉGIA ============ -->
+<section data-s="tipos">
+  <div class="card" style="margin-bottom:16px">
+    <div class="row between">
+      <div class="row"><span class="mono">Filtrar</span>
+        <div class="chipset" id="tipoFiltro"></div></div>
+      <span class="mono" id="tipoSel"></span>
+    </div>
+  </div>
+  <div class="grid g4" id="tipoGrid"></div>
+  <div class="card" style="margin-top:16px" id="tipoDet"></div>
+  <div class="card" style="margin-top:16px" id="trilhaPanel"></div>
+  <div class="card" style="margin-top:16px">
+    <h2>Combine formatos: sua esteira</h2>
+    <p class="hint">Marque formatos secundários para usar como isca, bônus, order bump ou upsell do produto principal.</p>
+    <div class="chipset" id="tipoSec"></div>
+  </div>
+</section>
+
+<section data-s="ideia">
+  <div class="grid g2">
+    <div class="card">
+      <h2>Nicho e produto</h2>
+      <p class="hint">Mercado › subnicho › recorte. "Finanças" é mercado; "organização financeira para enfermeiras de plantão" é nicho.</p>
+      <label class="l">Nome do produto</label><input type="text" data-k="nome" placeholder="Ex.: Método Plantão no Azul">
+      <label class="l">Tema em 2–4 palavras</label><input type="text" data-k="tema" placeholder="Ex.: organização financeira">
+      <div class="grid g3" style="gap:8px">
+        <div><label class="l">Mercado</label><input type="text" data-k="mercado" placeholder="Finanças"></div>
+        <div><label class="l">Subnicho</label><input type="text" data-k="subnicho" placeholder="Finanças pessoais"></div>
+        <div><label class="l">Recorte</label><input type="text" data-k="recorte" placeholder="Profissionais de saúde em plantão"></div>
+      </div>
+      <label class="l">Por que você? <small>— resultados, formação, experiência</small></label>
+      <textarea data-k="autoridade" placeholder="Saí de R$ 18 mil de dívida para 6 meses de reserva em 2 anos trabalhando em escala 12x36..."></textarea>
+      <label class="l">Lacuna no mercado <small>— o que os concorrentes não resolvem</small></label>
+      <textarea data-k="lacuna" placeholder="Os cursos de finanças assumem salário fixo; ninguém ensina a lidar com renda variável de plantão."></textarea>
+      <div class="tip">Pesquise: <a href="https://trends.google.com.br" target="_blank" rel="noopener">Google Trends</a> · <a href="https://answerthepublic.com" target="_blank" rel="noopener">AnswerThePublic</a> · lista de mais vendidos da Amazon · comentários dos concorrentes.</div>
+    </div>
+    <div class="card">
+      <h2>Avatar</h2>
+      <label class="l">Avatar em uma expressão <small>— usada nas copys</small></label><input type="text" data-k="avatarCurto" placeholder="Ex.: enfermeiras de plantão">
+      <label class="l">Quem é <small>— idade, rotina, contexto</small></label>
+      <textarea data-k="avatar" placeholder="28–40 anos, escala 12x36, renda variável com plantões extras..."></textarea>
+      <label class="l">Dor principal <small>— nas palavras do avatar</small></label>
+      <textarea data-k="dor" placeholder="&quot;Faço mil plantões extras e mesmo assim o dinheiro some antes do fim do mês&quot;"></textarea>
+      <label class="l">Dor em poucas palavras <small>— começando com verbo</small></label><input type="text" data-k="dorCurta" placeholder="Ex.: ver o dinheiro sumir antes do fim do mês">
+      <label class="l">Desejo / resultado sonhado</label>
+      <textarea data-k="desejo" placeholder="Ter reserva de 6 meses e poder recusar plantão sem culpa"></textarea>
+      <label class="l">Objeções <small>— uma por linha</small></label>
+      <textarea data-k="objecoes" placeholder="Não tenho tempo&#10;Já tentei planilha e não funcionou&#10;Está caro"></textarea>
+    </div>
+    <div class="card span">
+      <h2>Mapa de empatia</h2>
+      <p class="hint">Entreviste pessoas do avatar e preencha com frases reais. É daqui que sai a melhor copy.</p>
+      <div class="grid g3">
+        <div><label class="l">O que pensa e sente?</label><textarea data-k="e_pensa"></textarea></div>
+        <div><label class="l">O que vê? <small>(ambiente, mercado)</small></label><textarea data-k="e_ve"></textarea></div>
+        <div><label class="l">O que ouve? <small>(amigos, família, influenciadores)</small></label><textarea data-k="e_ouve"></textarea></div>
+        <div><label class="l">O que fala e faz?</label><textarea data-k="e_fala"></textarea></div>
+        <div><label class="l">Medos e frustrações</label><textarea data-k="e_medos"></textarea></div>
+        <div><label class="l">Ganhos desejados</label><textarea data-k="e_ganhos"></textarea></div>
+      </div>
+    </div>
+    <div class="card span">
+      <h2>Big promise</h2>
+      <p class="hint">A promessa central alimenta copy, criativos e página de vendas.</p>
+      <div class="grid g4">
+        <div><label class="l">Resultado específico</label><input type="text" data-k="p_res" placeholder="montar sua reserva de emergência"></div>
+        <div><label class="l">Prazo</label><input type="text" data-k="p_prazo" placeholder="em 90 dias"></div>
+        <div><label class="l">Sem o quê</label><input type="text" data-k="p_sem" placeholder="sem fazer plantão extra"></div>
+        <div><label class="l">Mecanismo / método</label><input type="text" data-k="p_mec" placeholder="Método Escala Financeira"></div>
+      </div>
+      <div class="tip" id="promessa"></div>
+    </div>
+  </div>
+</section>
+
+<section data-s="validacao">
+  <div class="grid g2">
+    <div class="card"><h2>Teste de validação</h2><p class="hint">Nota de 0 a 10 para cada critério. Seja duro: é mais barato descobrir agora.</p><div id="crits"></div></div>
+    <div class="grid" style="align-content:start">
+      <div class="card">
+        <span class="mono">Resultado</span>
+        <div class="row" style="align-items:flex-end;gap:12px;margin:6px 0"><div class="score" id="vScore">0</div><span class="mono" style="margin-bottom:8px">/ 100</span></div>
+        <span class="pill" id="vPill">—</span>
+        <p id="vTxt"></p>
+        <span class="mono">Pontos mais fracos</span><div id="vWeak"></div>
+      </div>
+      <div class="card"><h3>Valide antes de produzir</h3><div id="valChk"></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ MARCA ============ -->
+<section data-s="marca">
+  <div class="grid g2">
+    <div class="card">
+      <h2>Posicionamento</h2>
+      <p class="hint">A frase que diz por que sua marca existe e por que é diferente.</p>
+      <div class="grid g3" style="gap:8px;grid-template-columns:1fr 1fr">
+        <div><label class="l">Categoria</label><input type="text" data-k="m_cat" placeholder="o programa de educação financeira"></div>
+        <div><label class="l">Principal concorrente / alternativa</label><input type="text" data-k="m_conc" placeholder="planilhas genéricas e cursos para CLT"></div>
+      </div>
+      <label class="l">Diferencial</label><input type="text" data-k="m_dif" placeholder="é feito para quem tem renda variável de escala">
+      <div class="tip" id="posStmt"></div>
+      <label class="l">Missão <small>— o que você faz todo dia</small></label><textarea data-k="m_missao" placeholder="Ajudar profissionais de saúde a terem paz financeira sem sacrificar o descanso."></textarea>
+      <label class="l">Visão <small>— onde quer chegar</small></label><textarea data-k="m_visao" placeholder="Ser a referência em finanças para profissionais de saúde do Brasil."></textarea>
+      <label class="l">Valores <small>— separe por vírgula</small></label><input type="text" data-k="m_valores" placeholder="Simplicidade, respeito ao descanso, transparência">
+      <label class="l">Slogan / tagline</label><input type="text" data-k="m_slogan" placeholder="Plantão é escolha, não necessidade.">
+      <div class="chipset" id="slogans" style="margin-top:8px"></div>
+    </div>
+    <div class="card">
+      <h2>Tom de voz</h2>
+      <p class="hint">Ajuste os controles. As regras de escrita se atualizam.</p>
+      <div id="tom"></div>
+      <div class="grid" style="grid-template-columns:1fr 1fr;gap:10px;margin-top:12px">
+        <div class="out" id="tomSim" style="font-size:13.5px"></div>
+        <div class="out" id="tomNao" style="font-size:13.5px"></div>
+      </div>
+      <label class="l">Palavras da marca <small>— use sempre</small></label><input type="text" data-k="m_palavras" placeholder="leveza, escala, reserva, liberdade">
+      <label class="l">Palavras proibidas</label><input type="text" data-k="m_proib" placeholder="fique rico, fácil, garantido">
+    </div>
+    <div class="card span">
+      <div class="row between"><div><h2>Arquétipo de marca</h2><p class="hint">Responda ao teste rápido ou escolha direto. O arquétipo sugere cores, fontes e voz.</p></div><span id="arqSel"></span></div>
+      <div class="grid g2">
+        <div id="arqQuiz"></div>
+        <div class="grid g3" id="arqGrid" style="grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:8px;align-content:start"></div>
+      </div>
+      <div class="tip" id="arqDet" style="display:none"></div>
+    </div>
+  </div>
+</section>
+
+<section data-s="cores">
+  <div class="grid g2">
+    <div class="card span">
+      <div class="row between"><h2>Círculo cromático e harmonias</h2>
+        <div class="row"><input type="color" id="baseColor"><select id="harm" style="width:auto"></select><button class="btn ghost sm" id="fromArq">Usar cor do arquétipo</button></div></div>
+      <p class="hint" id="harmTxt"></p>
+      <div class="wheel-wrap">
+        <div class="wheel" id="wheel"><div class="center" id="wheelC"></div></div>
+        <div style="flex:1;min-width:280px">
+          <div class="swatches" id="swatches"></div>
+          <p class="hint" style="margin-top:8px">Clique numa cor para editá-la. Clique no círculo para mudar a cor base.</p>
+          <div class="row"><button class="btn sm" id="copyCss">Copiar variáveis CSS</button><button class="btn ghost sm" id="copyHex">Copiar HEX</button></div>
+        </div>
+      </div>
+    </div>
+    <div class="card">
+      <h2>Regra 60-30-10</h2>
+      <p class="hint">60% cor dominante (fundo), 30% secundária (blocos, títulos), 10% destaque (botões). Veja sua paleta aplicada:</p>
+      <div class="row" style="margin-bottom:10px"><button class="btn ghost sm" id="lpInv">Inverter claro/escuro</button></div>
+      <div id="lp"></div>
+      <h3 style="margin-top:16px">Escala de tons da cor primária</h3>
+      <div id="scale"></div>
+    </div>
+    <div class="card">
+      <h2>Verificador de contraste (WCAG)</h2>
+      <p class="hint">Texto precisa de contraste mínimo de 4,5:1 (ou 3:1 em títulos grandes) para ser lido por todos.</p>
+      <div class="row"><label class="row" style="gap:6px">Texto <input type="color" id="cFg"></label><label class="row" style="gap:6px">Fundo <input type="color" id="cBg"></label><button class="btn ghost sm" id="cSwap">Inverter</button></div>
+      <div class="sample" id="cSample"><b style="font-size:22px">Título de exemplo</b><br>Texto corrido de exemplo para testar a leitura.</div>
+      <div class="row" style="align-items:flex-end"><div class="ratio" id="cRatio">—</div><div id="cBadges" class="row" style="gap:6px;margin-bottom:6px"></div></div>
+      <h3 style="margin-top:16px">Combinações da sua paleta</h3>
+      <div class="pairs" id="pairs"></div>
+    </div>
+    <div class="card span">
+      <h2>Psicologia das cores</h2>
+      <p class="hint">Clique numa cor para usá-la como base da paleta.</p>
+      <div class="grid g2" id="psico" style="gap:0 24px"></div>
+    </div>
+  </div>
+</section>
+
+<section data-s="tipografia">
+  <div class="card" style="margin-bottom:16px">
+    <div class="row between"><div><h2>Pares de fontes</h2><p class="hint">Uma fonte de título com personalidade + uma de texto legível. Todas gratuitas no Google Fonts.</p></div>
+    <label class="row" style="gap:6px"><input type="checkbox" id="fArq"> Só os recomendados para o meu arquétipo</label></div>
+    <label class="l">Texto de teste</label><input type="text" id="fTxt">
+  </div>
+  <div class="grid g3" id="fontGrid"></div>
+  <div class="card" style="margin-top:16px">
+    <h2>Hierarquia tipográfica</h2>
+    <p class="hint">Escala modular 1,25. Use estes tamanhos em página de vendas, e-book e slides.</p>
+    <div id="hier"></div>
+  </div>
+</section>
+
+<!-- ============ CRIAÇÃO ============ -->
+<section data-s="imagens">
+  <div class="tabs" id="imgTabs"></div>
+  <div data-it="mock">
+    <div class="grid g2">
+      <div class="card">
+        <h2>Estúdio de criativos</h2>
+        <p class="hint">Peça montada com sua paleta, suas fontes e sua promessa. Ajuste e use como referência para o designer ou para o Canva.</p>
+        <label class="l">Formato</label><div class="chipset" id="mFmt"></div>
+        <label class="l">Layout</label><div class="chipset" id="mLay"></div>
+        <label class="l">Fundo</label><div class="chipset" id="mBg"></div>
+        <label class="l">Selo</label><input type="text" data-k="mk_badge" placeholder="Novo · Turma 1">
+        <label class="l">Título</label><input type="text" data-k="mk_h">
+        <label class="l">Subtítulo</label><input type="text" data-k="mk_s">
+        <label class="l">Botão / chamada</label><input type="text" data-k="mk_c" placeholder="Garanta sua vaga">
+        <label class="l">Autor(a)</label><input type="text" data-k="mk_a" placeholder="Seu nome">
+        <div class="row" style="margin-top:12px"><button class="btn ghost sm" id="mkFill">Preencher com minha promessa</button></div>
+      </div>
+      <div class="card"><div class="mock-stage"><div id="mock"></div></div><p class="hint" style="margin-top:10px">Para salvar, tire um print da peça. Medidas finais de cada canal estão na aba "Tamanhos".</p></div>
+    </div>
+  </div>
+  <div data-it="prompt">
+    <div class="grid g2">
+      <div class="card">
+        <h2>Gerador de prompts para IA de imagem</h2>
+        <p class="hint">Monte prompts para geradores de imagem usando a direção visual da sua marca.</p>
+        <label class="l">Peça</label><div class="chipset" id="pPeca"></div>
+        <label class="l">Estilo visual</label><div id="pEst"></div>
+        <label class="l">Cena / elemento principal <small>— opcional</small></label><input type="text" data-k="pr_cena" placeholder="mulher de jaleco sorrindo com celular na mão, em casa após plantão">
+        <label class="l">Clima / emoção</label><input type="text" data-k="pr_mood" placeholder="alívio, tranquilidade, conquista">
+        <label class="row" style="gap:6px;margin-top:10px"><input type="checkbox" data-k="pr_txt" data-bool> Deixar espaço livre para texto</label>
+      </div>
+      <div class="card">
+        <h3>Prompt em português</h3><div class="out" id="prPt"></div>
+        <h3 style="margin-top:14px">Prompt em inglês <small class="hint">(costuma funcionar melhor)</small></h3><div class="out" id="prEn"></div>
+        <h3 style="margin-top:14px">Prompt negativo</h3><div class="out" id="prNeg"></div>
+        <div class="tip y">Use só imagens que você criou ou tem licença para usar. Não gere rostos de pessoas reais nem marcas de terceiros.</div>
+      </div>
+    </div>
+  </div>
+  <div data-it="tam">
+    <div class="card"><h2>Tamanhos por canal</h2><p class="hint">Medidas em pixels. Mantenha textos e rostos longe das bordas (área segura de ~10%).</p><div class="tw"><table id="tamTb"></table></div></div>
+  </div>
+  <div data-it="check">
+    <div class="grid g2">
+      <div class="card"><h2>Checklist do criativo</h2><div id="criaChk"></div></div>
+      <div class="card"><h2>Direção visual da marca</h2>
+        <label class="l">Estilo principal</label><select data-k="v_estilo" id="vEstilo"></select>
+        <label class="l">Referências visuais <small>— links, perfis, palavras-chave</small></label><textarea data-k="v_ref"></textarea>
+        <label class="l">O que evitar</label><textarea data-k="v_evitar" placeholder="Bancos de imagem genéricos, fotos de dinheiro voando..."></textarea>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section data-s="copy">
+  <div class="tabs" id="cpTabs"></div>
+  <div data-ct="head">
+    <div class="grid g2">
+      <div class="card"><div class="row between"><h2>Headlines</h2><span class="mono" id="hCount"></span></div><p class="hint">Geradas com os dados do avatar e da promessa. Salve as favoritas. Campos vazios aparecem destacados.</p><div id="heads"></div></div>
+      <div class="grid" style="align-content:start">
+        <div class="card"><h2>Suas favoritas</h2><div id="favs"></div></div>
+        <div class="card"><h2>CTAs</h2><div class="chipset" id="ctas"></div></div>
+        <div class="card"><h2>Bullets fascinantes</h2><p class="hint">Gerados a partir das aulas da aba Conteúdo.</p><div class="out" id="bullets"></div></div>
+      </div>
+    </div>
+  </div>
+  <div data-ct="fw">
+    <div class="card"><h2>Frameworks de copy</h2><p class="hint">Rascunhos montados com seus dados. Edite à vontade antes de usar.</p>
+      <div class="chipset" id="fwSel" style="margin-bottom:12px"></div>
+      <div class="grid g2"><div id="fwSteps"></div><div class="out" id="fwOut"></div></div></div>
+  </div>
+  <div data-ct="pv">
+    <div class="card"><div class="row between"><div><h2>Página de vendas</h2><p class="hint">Estrutura completa em 14 blocos, rascunhada com tudo que você preencheu.</p></div></div>
+      <div class="out" id="pvOut"></div></div>
+  </div>
+  <div data-ct="email">
+    <div class="card"><h2>Sequência de e-mails</h2><p class="hint">De acordo com a estratégia escolhida em Lançamento.</p><div id="emails"></div></div>
+  </div>
+  <div data-ct="obj">
+    <div class="grid g2">
+      <div class="card"><h2>Quebra de objeções</h2><p class="hint">Cada objeção do avatar vira uma resposta e uma pergunta para o FAQ.</p><div id="objs"></div></div>
+      <div class="card"><h2>Gatilhos mentais (uso ético)</h2><div class="tw"><table id="gat"></table></div></div>
+    </div>
+  </div>
+  <div data-ct="comp">
+    <div class="card"><h2>Checklist de conformidade</h2><p class="hint">Antes de publicar qualquer copy.</p><div id="compChk"></div></div>
+  </div>
+</section>
+
+<section data-s="conteudo">
+  <div class="card">
+    <div class="row between"><div><h2>Estrutura do conteúdo</h2><p class="hint" id="contHint"></p></div><button class="btn ghost sm" id="useTpl">Usar estrutura sugerida</button></div>
+    <div class="grid g2">
+      <div><label class="l">Ponto A — onde o cliente começa</label><textarea data-k="pontoA"></textarea></div>
+      <div><label class="l">Ponto B — onde o cliente termina</label><textarea data-k="pontoB"></textarea></div>
+    </div>
+    <div class="row between" style="margin:18px 0 10px"><h3 style="margin:0" id="modTitle">Módulos</h3><div class="row"><span class="mono" id="modCount"></span><button class="btn sm" id="addMod">+ Adicionar</button></div></div>
+    <div id="mods"></div>
+  </div>
+</section>
+
+<section data-s="producao">
+  <div id="prodEmpty" class="card"><h2>Escolha um formato primeiro</h2><p class="hint" style="margin:0">A etapa de produção muda conforme o tipo de infoproduto. <a href="#tipos">Escolha o formato principal</a>.</p></div>
+  <div id="prodBody" class="grid g2">
+    <div class="card"><div class="row between"><h2>Etapas de produção</h2><span class="mono" id="prodCount"></span></div><p class="hint" id="prodFoco"></p><div id="prodEtapas"></div></div>
+    <div class="grid" style="align-content:start">
+      <div class="card"><h2>Especificações</h2><div class="tw"><table id="prodSpecs"></table></div><p class="hint" style="margin:12px 0 0"><b>Ferramentas:</b> <span id="prodFerr"></span></p></div>
+      <div class="card"><h2>Controle de qualidade</h2><p class="hint">Antes de liberar para o cliente.</p><div id="prodCheck"></div></div>
+      <div class="card"><h2>Cronograma de produção</h2>
+        <div class="grid" style="grid-template-columns:1fr 1fr;gap:8px"><div><label class="l">Início</label><input type="date" data-k="prodIni"></div><div><label class="l">Dias por etapa</label><input type="number" data-k="prodDias" data-num value="3"></div></div>
+        <div class="timeline" id="prodTl" style="margin-top:14px"></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ VENDA ============ -->
+<section data-s="oferta">
+  <div class="grid g2">
+    <div class="card">
+      <h2>Pilha de valor</h2>
+      <p class="hint">Tudo que o cliente recebe e quanto cada item valeria sozinho.</p>
+      <div id="stack"></div><button class="btn ghost sm" id="addStack">+ Item / bônus</button>
+      <div class="grid g3" style="margin-top:14px;grid-template-columns:repeat(3,1fr);gap:8px">
+        <div class="kpi"><span class="mono">Valor total</span><b id="stTotal">R$ 0</b></div>
+        <div class="kpi"><span class="mono">Preço</span><b id="stPrice">R$ 0</b></div>
+        <div class="kpi"><span class="mono">Valor/preço</span><b id="stRatio">—</b></div>
+      </div>
+      <label class="l">Garantia</label>
+      <select data-k="garantia"><option>7 dias incondicional</option><option>15 dias incondicional</option><option>30 dias incondicional</option><option>Garantia condicional (aplicou e não teve resultado)</option></select>
+      <label class="l">Urgência / escassez <small>— só se for real</small></label><input type="text" data-k="urgencia" placeholder="Bônus só para as 50 primeiras / carrinho fecha domingo">
+      <label class="l">Parcelamento</label><select data-k="parcelas" data-num><option value="1">À vista</option><option value="6">6x</option><option value="10">10x</option><option value="12" selected>12x</option></select>
+    </div>
+    <div class="card">
+     <div id="calcUnico">
+      <h2>Preço e projeção</h2><p class="hint" id="calcNote"></p>
+      <div class="grid" style="grid-template-columns:1fr 1fr;gap:8px">
+        <div><label class="l">Preço (R$)</label><input type="number" data-k="preco" data-num value="197"></div>
+        <div><label class="l">Taxa plataforma (%)</label><input type="number" data-k="taxa" data-num value="9.9" step="0.1"></div>
+        <div><label class="l">Leads</label><input type="number" data-k="leads" data-num value="2000"></div>
+        <div><label class="l">Custo por lead (R$)</label><input type="number" data-k="cpl" data-num value="3" step="0.1"></div>
+        <div><label class="l">Conversão (%)</label><input type="number" data-k="conv" data-num value="2" step="0.1"></div>
+        <div><label class="l">Impostos (%)</label><input type="number" data-k="imposto" data-num value="6" step="0.1"></div>
+        <div><label class="l">Custo de produção (R$)</label><input type="number" data-k="custoProd" data-num value="1500"></div>
+        <div><label class="l">Order bump (R$) / adesão %</label><div class="row" style="flex-wrap:nowrap;gap:6px"><input type="number" data-k="bump" data-num value="37"><input type="number" data-k="bumpPct" data-num value="25"></div></div>
+      </div>
+      <div class="grid" style="grid-template-columns:repeat(3,1fr);gap:8px;margin-top:14px">
+        <div class="kpi"><span class="mono">Vendas</span><b id="cVendas">0</b></div>
+        <div class="kpi"><span class="mono">Faturamento</span><b id="cFat">R$ 0</b></div>
+        <div class="kpi"><span class="mono">Investimento</span><b id="cInv">R$ 0</b></div>
+        <div class="kpi"><span class="mono">Lucro líquido</span><b id="cLuc">R$ 0</b></div>
+        <div class="kpi"><span class="mono">ROAS</span><b id="cRoas">—</b></div>
+        <div class="kpi"><span class="mono">CPL máximo</span><b id="cMax">R$ 0</b></div>
+      </div>
+      <div class="tip" id="cTip"></div>
+    </div>
+     <div id="calcRec">
+      <h2>Receita recorrente</h2><p class="hint">Projeção de 12 meses com base em novos assinantes e cancelamento mensal.</p>
+      <div class="grid" style="grid-template-columns:1fr 1fr;gap:8px">
+        <div><label class="l">Mensalidade (R$)</label><input type="number" data-k="preco" data-num></div>
+        <div><label class="l">Assinantes iniciais</label><input type="number" data-k="r_ini" data-num value="50"></div>
+        <div><label class="l">Novos assinantes por mês</label><input type="number" data-k="r_novos" data-num value="30"></div>
+        <div><label class="l">Cancelamento mensal (%)</label><input type="number" data-k="r_churn" data-num value="6" step="0.1"></div>
+        <div><label class="l">Custo por assinante novo (R$)</label><input type="number" data-k="r_cac" data-num value="60"></div>
+        <div><label class="l">Taxas + impostos (%)</label><input type="number" data-k="r_taxa" data-num value="15" step="0.1"></div>
+      </div>
+      <div class="grid" style="grid-template-columns:repeat(3,1fr);gap:8px;margin-top:14px">
+        <div class="kpi"><span class="mono">Assinantes no mês 12</span><b id="rAss">0</b></div>
+        <div class="kpi"><span class="mono">MRR no mês 12</span><b id="rMrr">R$ 0</b></div>
+        <div class="kpi"><span class="mono">Receita em 12 meses</span><b id="rRec">R$ 0</b></div>
+        <div class="kpi"><span class="mono">Tempo médio (meses)</span><b id="rVida">0</b></div>
+        <div class="kpi"><span class="mono">LTV líquido</span><b id="rLtv">R$ 0</b></div>
+        <div class="kpi"><span class="mono">LTV ÷ CAC</span><b id="rRatio">—</b></div>
+      </div>
+      <div id="rChart" style="margin-top:14px"></div>
+      <div class="tip" id="rTip"></div>
+     </div>
+     <div id="calcHT">
+      <h2>Funil de alto valor</h2><p class="hint">Leads, aplicações, chamadas de diagnóstico e fechamento.</p>
+      <div class="grid" style="grid-template-columns:1fr 1fr;gap:8px">
+        <div><label class="l">Ticket (R$)</label><input type="number" data-k="preco" data-num></div>
+        <div><label class="l">Leads por mês</label><input type="number" data-k="h_leads" data-num value="400"></div>
+        <div><label class="l">Leads que aplicam (%)</label><input type="number" data-k="h_aplic" data-num value="6" step="0.1"></div>
+        <div><label class="l">Comparecimento às chamadas (%)</label><input type="number" data-k="h_comp" data-num value="70"></div>
+        <div><label class="l">Fechamento (%)</label><input type="number" data-k="h_fech" data-num value="25"></div>
+        <div><label class="l">Custo por lead (R$)</label><input type="number" data-k="h_cpl" data-num value="8" step="0.1"></div>
+        <div><label class="l">Duração da chamada (min)</label><input type="number" data-k="h_min" data-num value="45"></div>
+        <div><label class="l">Taxas + impostos (%)</label><input type="number" data-k="h_taxa" data-num value="12" step="0.1"></div>
+      </div>
+      <div id="hFunnel" style="margin-top:14px"></div>
+      <div class="grid" style="grid-template-columns:repeat(3,1fr);gap:8px;margin-top:10px">
+        <div class="kpi"><span class="mono">Clientes por mês</span><b id="hCli">0</b></div>
+        <div class="kpi"><span class="mono">Faturamento</span><b id="hFat">R$ 0</b></div>
+        <div class="kpi"><span class="mono">Lucro líquido</span><b id="hLuc">R$ 0</b></div>
+        <div class="kpi"><span class="mono">Custo por cliente</span><b id="hCac">R$ 0</b></div>
+        <div class="kpi"><span class="mono">Horas em chamadas</span><b id="hHoras">0</b></div>
+        <div class="kpi"><span class="mono">Valor por chamada</span><b id="hVpc">R$ 0</b></div>
+      </div>
+      <div class="tip" id="hTip"></div>
+     </div>
+    </div>
+    <div class="card span">
+      <h2>Esteira de produtos</h2>
+      <p class="hint">Do gratuito ao premium: cada degrau leva o cliente para o próximo.</p>
+      <div class="ladder" id="ladder"></div>
+    </div>
+  </div>
+</section>
+
+<section data-s="marketing">
+  <div class="grid g2">
+    <div class="card span"><h2>Funil de marketing</h2><p class="hint">Cada etapa tem objetivo, formatos e métrica próprios.</p><div class="funil" id="funil"></div></div>
+    <div class="card">
+      <h2>Canais</h2><p class="hint">Escolha de 2 a 4 para começar. Foco vence presença em todo lugar.</p>
+      <div class="chipset" id="canais"></div>
+      <h3 style="margin-top:18px">Pilares de conteúdo</h3>
+      <div class="chipset" id="pilares"></div>
+      <h3 style="margin-top:18px">Bio do perfil</h3>
+      <div class="out" id="bio"></div>
+    </div>
+    <div class="card">
+      <h2>Isca digital</h2>
+      <p class="hint">O material gratuito que troca valor por contato (com consentimento, LGPD).</p>
+      <label class="l">Formato da isca</label>
+      <select data-k="isca"><option>Checklist</option><option>Mini e-book</option><option>Planilha gratuita</option><option>Aula gratuita</option><option>Quiz de diagnóstico</option><option>Desafio de 5 dias</option><option>Template</option></select>
+      <div class="out" id="iscaOut" style="margin-top:12px"></div>
+    </div>
+    <div class="card span">
+      <div class="row between"><div><h2>Calendário editorial: 4 semanas</h2><p class="hint">Gerado com seus canais, pilares e tema. Na última semana entra o pilar de venda.</p></div><button class="btn ghost sm" id="calShuffle">Gerar outra versão</button></div>
+      <div class="tw"><div class="cal" id="cal"></div></div>
+    </div>
+  </div>
+</section>
+
+<section data-s="lancamento">
+  <div class="grid g2">
+    <div class="card">
+      <h2>Estratégia</h2>
+      <select data-k="estrategia" id="estrategia"><option value="semente">Lançamento semente (vende antes de gravar)</option><option value="interno">Lançamento interno (aquecimento + carrinho por poucos dias)</option><option value="perpetuo">Perpétuo (funil sempre aberto)</option><option value="aplicacao">Funil de aplicação (alto valor)</option></select>
+      <div class="tip" id="estrTip"></div>
+      <label class="l">Data de abertura do carrinho</label><input type="date" data-k="dataAbertura">
+      <h3 style="margin-top:18px">Cronograma</h3>
+      <div class="timeline" id="timeline"></div>
+    </div>
+    <div class="card"><h2>Checklist por fase</h2><div id="phases"></div></div>
+  </div>
+</section>
+
+<section data-s="metricas">
+  <div class="grid g2">
+    <div class="card"><h2>Painel de métricas</h2><p class="hint">Digite os números do seu lançamento ou funil. Referências aproximadas de mercado; variam por nicho e canal.</p><div id="mets"></div></div>
+    <div class="card"><h2>Diagnóstico</h2><div id="metDiag"></div></div>
+  </div>
+</section>
+
+<section data-s="briefing">
+  <div class="card">
+    <div class="row between"><div><h2 id="bTitle">Briefing do infoproduto</h2><p class="hint">Tudo em uma página. Envie para designer, copywriter, gestor de tráfego ou sócio.</p></div>
+    <div class="row"><button class="btn" id="copyBrief">Copiar briefing (Markdown)</button><button class="btn ghost" id="copyBrand">Copiar manual de marca</button></div></div>
+    <div id="bBrand" style="margin:6px 0 16px"></div>
+    <div class="canvas" id="canvas"></div>
+  </div>
+</section>
+
+<div class="foot"><button class="btn ghost" id="prev">← Anterior</button><button class="btn" id="next">Próximo →</button></div>
+</main>
+</div>
+
+<div class="toast" id="toast"></div>
+<div class="modal" id="mReset"><div class="card"><h3>Começar um projeto novo?</h3><p class="hint">Tudo que está salvo neste navegador será apagado. Exporte antes se quiser guardar.</p><div class="row"><button class="btn" id="rYes">Apagar e começar</button><button class="btn ghost" data-close>Cancelar</button></div></div></div>
+<div class="modal" id="mExport"><div class="card"><h3>Exportar / importar projeto</h3><p class="hint">Copie o código para guardar ou abrir em outro navegador. Para importar, cole um código e clique em Importar.</p>
+  <textarea id="exTxt" style="min-height:160px;font:12px 'JetBrains Mono'"></textarea>
+  <div class="row" style="margin-top:10px"><button class="btn" id="exCopy">Copiar</button><button class="btn dark" id="exImp">Importar</button><button class="btn ghost" data-close>Fechar</button></div></div></div>
+
+<script src="data.js"></script>
+<script src="trilhas.js"></script>
+<script src="app.js"></script>
+</body>
+</html>

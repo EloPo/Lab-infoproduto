@@ -1,0 +1,20 @@
+LABORATÓRIO DE INFOPRODUTO
+==========================
+
+Arquivos
+- index.html  estrutura da página (abra este arquivo no navegador)
+- style.css   visual (cores, fontes, layout)
+- data.js     conteúdos: tipos de infoproduto, arquétipos, cores, fontes, copy, métricas
+- trilhas.js  trilha de cada tipo de produto (ordem das etapas, recomendações, produção)
+- app.js      lógica da aplicação
+
+Como usar
+1. Descompacte a pasta.
+2. Dê dois cliques em index.html. Não precisa de servidor nem de instalação.
+3. Para publicar na internet, envie a pasta inteira para qualquer hospedagem de site estático
+   (ex.: Netlify, Vercel, GitHub Pages, hospedagem comum). Mantenha os 5 arquivos juntos.
+
+Observações
+- Os dados ficam salvos no navegador (localStorage). Use "Exportar / importar projeto" para levar para outro computador.
+- As fontes vêm do Google Fonts; sem internet, o navegador usa fontes padrão.
+- Para mudar as cores do laboratório, edite as variáveis em :root no início do style.css.
